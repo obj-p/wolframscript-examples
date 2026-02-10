@@ -21,7 +21,8 @@ Print["2 + 2 == 4:  ", t1["Outcome"]]
 t2 = VerificationTest[Expand[(a + b)^2], a^2 + 2 a b + b^2];
 Print["Expand:      ", t2["Outcome"]]
 
-t3 = VerificationTest[1/0, ComplexInfinity];
+(* Use Quiet to suppress expected messages, or they count as failures *)
+t3 = VerificationTest[Quiet[1/0], ComplexInfinity];
 Print["1/0:         ", t3["Outcome"]]
 
 (* ---- TestReport: batch run with summary ---- *)
@@ -63,14 +64,14 @@ Print["Total tests:   ", report["TestsSucceededCount"] + report["TestsFailedCoun
 Print["All passed?    ", report["AllTestsSucceeded"]]
 
 (* ---- Inspecting failures ---- *)
-failed = report["TestsFailed"];
-If[Length[failed] > 0,
+failedIndices = report["TestsFailedIndices"];
+If[Length[failedIndices] > 0,
   Print["\n=== Failed Tests ==="];
   Do[
     result = report["TestResults"][id];
     Print["  Test #", id, ": expected ", result["ExpectedOutput"],
           ", got ", result["ActualOutput"]],
-    {id, Keys[failed]}
+    {id, failedIndices}
   ]
 ];
 

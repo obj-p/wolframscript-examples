@@ -12,8 +12,8 @@ args = $ScriptCommandLine;
 Print["All args (including script path): ", args]
 Print["Script path: ", First[args]]
 
-(* Drop the script path to get user arguments *)
-userArgs = Rest[args];
+(* Drop the script path and any "--" separator to get user arguments *)
+userArgs = DeleteCases[Rest[args], "--"];
 Print["User arguments: ", userArgs]
 
 If[Length[userArgs] == 0,
