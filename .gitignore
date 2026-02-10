@@ -1,0 +1,18 @@
+# Wolfram output artifacts
+output/
+*.png
+*.pdf
+*.svg
+*.csv
+*.json
+
+# Wolfram notebook files (use .wl scripts instead)
+*.nb
+*.cdf
+
+# Wolfram paclet build artifacts
+build/
+
+# OS files
+.DS_Store
+Thumbs.db
